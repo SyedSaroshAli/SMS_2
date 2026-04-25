@@ -306,6 +306,7 @@ import 'package:school_management_system/dashboard/student_dashboard.dart';
 import 'package:school_management_system/services/auth_service.dart';
 import 'package:school_management_system/services/api_service.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:school_management_system/utils/app_footer.dart';
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -375,8 +376,9 @@ class _SigninScreenState extends State<SigninScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor:
-            isError ? Theme.of(context).colorScheme.error : Colors.blue,
+        backgroundColor: isError
+            ? Theme.of(context).colorScheme.error
+            : Colors.blue,
       ),
     );
   }
@@ -384,6 +386,10 @@ class _SigninScreenState extends State<SigninScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: AppFooter(
+        onWebsiteTap: _openWebsite,
+        onPhoneTap: _callNumber,
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -394,34 +400,32 @@ class _SigninScreenState extends State<SigninScreen> {
                   return SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: ConstrainedBox(
-                      constraints:
-                          BoxConstraints(minHeight: constraints.maxHeight),
+                      constraints: BoxConstraints(
+                        minHeight: constraints.maxHeight,
+                      ),
                       child: IntrinsicHeight(
                         child: Center(
                           child: Padding(
                             padding: EdgeInsets.symmetric(
-                              horizontal:
-                                  constraints.maxWidth > 600 ? 40 : 20,
+                              horizontal: constraints.maxWidth > 600 ? 40 : 20,
                               vertical: 20,
                             ),
                             child: Container(
-                              constraints:
-                                  const BoxConstraints(maxWidth: 500),
+                              constraints: const BoxConstraints(maxWidth: 500),
                               decoration: BoxDecoration(
-                                color:
-                                    Theme.of(context).colorScheme.surface,
+                                color: Theme.of(context).colorScheme.surface,
                                 border: Border.all(
-                                  color: Theme.of(context)
-                                      .dividerColor
-                                      .withOpacity(0.5),
+                                  color: Theme.of(
+                                    context,
+                                  ).dividerColor.withOpacity(0.5),
                                   width: 1,
                                 ),
                                 borderRadius: BorderRadius.circular(20),
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Theme.of(context)
-                                        .shadowColor
-                                        .withOpacity(0.1),
+                                    color: Theme.of(
+                                      context,
+                                    ).shadowColor.withOpacity(0.1),
                                     blurRadius: 20,
                                     offset: const Offset(0, 8),
                                   ),
@@ -431,21 +435,18 @@ class _SigninScreenState extends State<SigninScreen> {
                                 padding: const EdgeInsets.all(32),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     // Logo
                                     Container(
-                                      padding:
-                                          const EdgeInsets.all(16),
+                                      padding: const EdgeInsets.all(16),
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(16),
+                                        borderRadius: BorderRadius.circular(16),
                                       ),
                                       child: Image.asset(
                                         "assets/school_logo.png",
-                                        height: 80,
-                                        width: 48,
+                                        height: 120,
+                                        width: 80,
                                         fit: BoxFit.contain,
                                       ),
                                     ),
@@ -454,14 +455,14 @@ class _SigninScreenState extends State<SigninScreen> {
                                     // Title
                                     Center(
                                       child: Text(
+                                        textAlign: TextAlign.center,
                                         "The Reader's Academy",
                                         style: TextStyle(
-                                          fontSize: 24,
-                                          fontWeight:
-                                              FontWeight.bold,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .onSurface,
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.bold,
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onSurface,
                                         ),
                                       ),
                                     ),
@@ -477,38 +478,38 @@ class _SigninScreenState extends State<SigninScreen> {
                                             .withOpacity(0.6),
                                       ),
                                     ),
-                                    const SizedBox(height: 32),
+                                    const SizedBox(height: 28),
 
                                     // Username
                                     TextField(
                                       controller: userID,
                                       style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onSurface,
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.onSurface,
                                       ),
                                       decoration: InputDecoration(
                                         labelText: "User Name",
                                         labelStyle: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.primary,
                                         ),
                                         prefixIcon: Icon(
                                           Icons.person_outline,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.primary,
                                         ),
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(
-                                                  12),
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
                                         ),
                                         filled: true,
-                                        fillColor: Theme.of(context)
-                                            .colorScheme
-                                            .surface,
+                                        fillColor: Theme.of(
+                                          context,
+                                        ).colorScheme.surface,
                                       ),
                                     ),
                                     const SizedBox(height: 20),
@@ -516,34 +517,31 @@ class _SigninScreenState extends State<SigninScreen> {
                                     // Password
                                     TextField(
                                       controller: password,
-                                      obscureText:
-                                          !isPasswordVisible,
+                                      obscureText: !isPasswordVisible,
                                       obscuringCharacter: "•",
                                       style: TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .onSurface,
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.onSurface,
                                       ),
                                       decoration: InputDecoration(
                                         labelText: "Password",
                                         labelStyle: TextStyle(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.primary,
                                         ),
                                         prefixIcon: Icon(
                                           Icons.lock_outline,
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primary,
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.primary,
                                         ),
                                         suffixIcon: IconButton(
                                           icon: Icon(
                                             isPasswordVisible
-                                                ? Icons
-                                                    .visibility_outlined
-                                                : Icons
-                                                    .visibility_off_outlined,
+                                                ? Icons.visibility_outlined
+                                                : Icons.visibility_off_outlined,
                                             color: Theme.of(context)
                                                 .colorScheme
                                                 .onSurface
@@ -557,14 +555,14 @@ class _SigninScreenState extends State<SigninScreen> {
                                           },
                                         ),
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(
-                                                  12),
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
                                         ),
                                         filled: true,
-                                        fillColor: Theme.of(context)
-                                            .colorScheme
-                                            .surface,
+                                        fillColor: Theme.of(
+                                          context,
+                                        ).colorScheme.surface,
                                       ),
                                     ),
                                     const SizedBox(height: 32),
@@ -574,19 +572,15 @@ class _SigninScreenState extends State<SigninScreen> {
                                       width: double.infinity,
                                       height: 56,
                                       child: ElevatedButton(
-                                        style:
-                                            ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                          foregroundColor:
-                                              Colors.white,
-                                          shape:
-                                              RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius
-                                                    .circular(12),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Theme.of(
+                                            context,
+                                          ).colorScheme.primary,
+                                          foregroundColor: Colors.white,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
                                           ),
                                         ),
                                         onPressed: isLoading
@@ -598,9 +592,9 @@ class _SigninScreenState extends State<SigninScreen> {
                                                 height: 24,
                                                 child:
                                                     CircularProgressIndicator(
-                                                  color: Colors.white,
-                                                  strokeWidth: 2.5,
-                                                ),
+                                                      color: Colors.white,
+                                                      strokeWidth: 2.5,
+                                                    ),
                                               )
                                             : const Text("Login"),
                                       ),
@@ -617,7 +611,7 @@ class _SigninScreenState extends State<SigninScreen> {
                 },
               ),
             ),
-/*
+            /*
             // 🔻 FOOTER (BOTTOM FIXED)
             Padding(
               padding:
@@ -666,57 +660,64 @@ class _SigninScreenState extends State<SigninScreen> {
               ),
             ),*/
             Padding(
-  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-  child: Row(
-    children: [
-      // LEFT (one line)
-      Expanded(
-        child: Text(
-          "Powered By KI Software Solutions",
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 7,
-            color: Colors.black,
-          ),
-        ),
-      ),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // // LEFT (one line)
+                  // Expanded(
+                  //   child: Text(
+                  //     "Powered By KI Software Solutions",
+                  //     maxLines: 1,
+                  //     overflow: TextOverflow.ellipsis,
+                  //     style: const TextStyle(
+                  //       fontWeight: FontWeight.bold,
+                  //       fontSize: 7,
+                  //       color: Colors.black,
+                  //     ),
+                  //   ),
+                  // ),
 
-      // CENTER (website)
-      Expanded(
-        child: GestureDetector(
-          onTap: _openWebsite,
-          child: const Text(
-            "Visit our website",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              decoration: TextDecoration.underline,
-              color: Colors.blue,
-              fontSize: 9,
-            ),
-          ),
-        ),
-      ),
+                  // CENTER (website)
+                  GestureDetector(
+                    onTap: _openWebsite,
+                    child: RichText(
+                      text: TextSpan(
+                        text: "Powered By :",
+                        style: TextStyle(color: Colors.black, fontSize: 12),
+                        children: [
+                          TextSpan(
+                            text: " KI Software Solutions",
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                              color: Colors.black,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
 
-      // RIGHT (contact)
-      Expanded(
-        child: GestureDetector(
-          onTap: _callNumber,
-          child: const Text(
-            "Contact us",
-            textAlign: TextAlign.right,
-            style: TextStyle(
-              decoration: TextDecoration.underline,
-              color: Colors.blue,
-              fontSize: 9,
+                  // RIGHT (contact)
+                  // Expanded(
+                  //   child: GestureDetector(
+                  //     onTap: _callNumber,
+                  //     child: const Text(
+                  //       "+92 3197617561",
+                  //       textAlign: TextAlign.right,
+                  //       style: TextStyle(
+                  //         decoration: TextDecoration.underline,
+                  //         color: Colors.blue,
+                  //         fontSize: 12,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                ],
+              ),
             ),
-          ),
-        ),
-      ),
-    ],
-  ),
-),
           ],
         ),
       ),

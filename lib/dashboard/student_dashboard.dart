@@ -15,6 +15,7 @@ import 'package:school_management_system/dashboard/sections/noticesSection.dart'
 import 'package:school_management_system/dashboard/sections/userIDSection.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:school_management_system/services/auth_service.dart';
+import 'package:school_management_system/utils/app_footer.dart';
 import '../../controllers/theme_controller.dart';
 
 class StudentDashboard extends StatelessWidget {
@@ -314,6 +315,7 @@ class StudentDashboard extends StatelessWidget {
               );
             },
           ),
+          bottomNavigationBar: const AppFooter(),
         );
       },
     );

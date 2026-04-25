@@ -359,7 +359,7 @@ import 'package:get/get.dart';
 import 'package:school_management_system/controllers/student_fee_controller.dart';
 import 'package:school_management_system/models/student_fee_models.dart';
 import 'package:school_management_system/utils/pdf_handler.dart';
-
+import 'package:school_management_system/utils/app_footer.dart';
 class StudentFeeScreen extends StatelessWidget {
   const StudentFeeScreen({super.key});
 
@@ -393,6 +393,7 @@ class StudentFeeScreen extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: const AppFooter(),
       body: Obx(() {
         if (controller.isLoading.value &&
             controller.regularFees.isEmpty &&

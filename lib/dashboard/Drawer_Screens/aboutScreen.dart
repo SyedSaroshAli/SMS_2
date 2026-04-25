@@ -282,6 +282,8 @@ import 'package:get/get.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:school_management_system/controllers/about_controller.dart';
 
+import 'package:school_management_system/utils/app_footer.dart';
+
 class AboutScreen extends StatelessWidget {
   AboutScreen({Key? key}) : super(key: key);
 
@@ -304,6 +306,7 @@ class AboutScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
       ),
+      bottomNavigationBar: const AppFooter(),
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());

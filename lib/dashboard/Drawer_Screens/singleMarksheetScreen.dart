@@ -581,7 +581,7 @@ import 'package:school_management_system/controllers/singleMarksheetController.d
 import 'package:school_management_system/models/singleMarksheetModel.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:school_management_system/utils/pdf_handler.dart';
-
+import 'package:school_management_system/utils/app_footer.dart';
 class MarksheetScreen extends StatelessWidget {
   const MarksheetScreen({super.key});
 
@@ -604,6 +604,7 @@ class MarksheetScreen extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: const AppFooter(),
       body: RefreshIndicator(
         onRefresh: controller.refreshMarksheet,
         child: Center(

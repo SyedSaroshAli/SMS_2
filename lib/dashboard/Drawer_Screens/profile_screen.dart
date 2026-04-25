@@ -4,6 +4,7 @@ import 'package:school_management_system/authentication_screens/changePasswordSc
 import 'package:school_management_system/authentication_screens/signin.dart';
 import 'package:school_management_system/controllers/admit_card_controller.dart';
 import 'package:school_management_system/services/auth_service.dart';
+import 'package:school_management_system/utils/app_footer.dart';
 
 String _toProperCase(String input) {
   if (input.isEmpty) return input;
@@ -123,6 +124,7 @@ class ProfileScreen extends StatelessWidget {
         final studentId = data['id'] ?? '';
 
         return Scaffold(
+          bottomNavigationBar: const AppFooter(),
           body: LayoutBuilder(
             builder: (context, constraints) {
               return CustomScrollView(

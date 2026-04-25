@@ -354,17 +354,31 @@ pw.Widget _pdfHeader(pw.Font titleFont, pw.ImageProvider? logoImage) {
          pw.Row(
         mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
         children: [
-          // ⬅️ LEFT
-          pw.Text(
-            "Powered by KI Software Solutions",
-            style: pw.TextStyle(fontSize: 10),
+          // ⬅️ LEFT: Powered by KI Software Solutions (bold+underlined)
+          pw.RichText(
+            text: pw.TextSpan(
+              children: [
+                pw.TextSpan(
+                  text: "Powered by ",
+                  style: pw.TextStyle(fontSize: 10),
+                ),
+                pw.TextSpan(
+                  text: "KI Software Solutions",
+                  style: pw.TextStyle(
+                    fontSize: 10,
+                    fontWeight: pw.FontWeight.bold,
+                    decoration: pw.TextDecoration.underline,
+                  ),
+                ),
+              ],
+            ),
           ),
 
-          // ⬇️ CENTER (CLICKABLE + UNDERLINED)
+          // ➡️ CENTER: visit our website with full URL
           pw.UrlLink(
             destination: "https://www.kisoftwaressolutions.com/",
             child: pw.Text(
-              "Visit Our Website",
+              "visit our website: www.kisoftwaressolutions.com",
               style: pw.TextStyle(
                 fontSize: 10,
                 color: PdfColors.blue,
@@ -373,7 +387,7 @@ pw.Widget _pdfHeader(pw.Font titleFont, pw.ImageProvider? logoImage) {
             ),
           ),
 
-          // ➡️ RIGHT (CLICKABLE PHONE)
+          // ➡️ RIGHT: contact number
           pw.UrlLink(
             destination: "tel:+923197617561",
             child: pw.Text(

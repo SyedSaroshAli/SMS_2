@@ -1933,6 +1933,7 @@ import 'package:get/get.dart';
 import 'package:school_management_system/controllers/noticeController.dart';
 import 'package:school_management_system/models/noticesModel.dart';
 import 'package:school_management_system/dashboard/Drawer_Screens/notice_details_dialog.dart';
+import 'package:school_management_system/utils/app_footer.dart';
 
 class NoticesScreen extends StatelessWidget {
   NoticesScreen({super.key});
@@ -1953,6 +1954,7 @@ class NoticesScreen extends StatelessWidget {
         title: const Text("Notices"),
         centerTitle: true,
       ),
+      bottomNavigationBar: const AppFooter(),
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());

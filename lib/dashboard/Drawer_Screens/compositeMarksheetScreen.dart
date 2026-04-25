@@ -604,6 +604,7 @@ import 'package:school_management_system/controllers/compositeMarksheetControlle
 import 'package:school_management_system/models/compositeMarksheetModel.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:school_management_system/utils/pdf_handler.dart';
+import 'package:school_management_system/utils/app_footer.dart';
 
 class CompositeMarksheetScreen extends StatelessWidget {
   const CompositeMarksheetScreen({super.key});
@@ -623,6 +624,7 @@ class CompositeMarksheetScreen extends StatelessWidget {
         ),
         elevation: 0,
       ),
+      bottomNavigationBar: const AppFooter(),
       body: Obx(() {
         if (controller.isLoading.value) {
           return Center(

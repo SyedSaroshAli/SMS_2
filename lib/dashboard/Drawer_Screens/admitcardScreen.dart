@@ -9,6 +9,7 @@ import 'package:school_management_system/controllers/about_controller.dart';
 import 'package:school_management_system/controllers/admit_card_controller.dart';
 import 'package:school_management_system/models/admitcardModel.dart';
 import 'package:school_management_system/utils/pdf_handler.dart';
+import 'package:school_management_system/utils/app_footer.dart';
 
 class AdmitCardScreen extends StatelessWidget {
   const AdmitCardScreen({super.key});
@@ -36,6 +37,7 @@ class AdmitCardScreen extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: const AppFooter(),
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
@@ -851,20 +853,32 @@ pw.Widget _buildPdfSignatures(pw.Font font) {
         pw.Row(
           mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
           children: [
-            // ⬅️ LEFT
-            pw.Text(
-              "Powered by KI Software Solutions",
-              style: pw.TextStyle(
-                font: font,
-                fontSize: 10,
+            // ⬅️ LEFT: "Powered by KI Software Solutions" (KI Software Solutions bold+underlined)
+            pw.RichText(
+              text: pw.TextSpan(
+                children: [
+                  pw.TextSpan(
+                    text: "Powered by ",
+                    style: pw.TextStyle(font: font, fontSize: 10),
+                  ),
+                  pw.TextSpan(
+                    text: "KI Software Solutions",
+                    style: pw.TextStyle(
+                      font: font,
+                      fontSize: 10,
+                      fontWeight: pw.FontWeight.bold,
+                      decoration: pw.TextDecoration.underline,
+                    ),
+                  ),
+                ],
               ),
             ),
 
-            // ⬇️ CENTER (CLICKABLE + UNDERLINED)
+            // ➡️ CENTER: visit our website: www.kisoftwaressolutions.com
             pw.UrlLink(
-              destination: "https://www.kisoftwaressolutions.com/", // change this
+              destination: "https://www.kisoftwaressolutions.com/",
               child: pw.Text(
-                "Visit Our Website",
+                "visit our website: www.kisoftwaressolutions.com",
                 style: pw.TextStyle(
                   font: font,
                   fontSize: 10,
@@ -874,9 +888,9 @@ pw.Widget _buildPdfSignatures(pw.Font font) {
               ),
             ),
 
-            // ➡️ RIGHT
+            // ➡️ RIGHT: contact number
             pw.UrlLink(
-              destination: "tel:+923197617561", // change this
+              destination: "tel:+923197617561",
               child: pw.Text(
                 "+92 3197617561",
                 style: pw.TextStyle(

@@ -15,6 +15,7 @@ import 'package:school_management_system/controllers/attendance_controller.dart'
 import 'package:permission_handler/permission_handler.dart';
 import 'package:school_management_system/models/about_model.dart';
 import 'package:school_management_system/utils/pdf_handler.dart';
+import 'package:school_management_system/utils/app_footer.dart';
 import 'package:http/http.dart' as http;
 
 /*
@@ -3569,6 +3570,7 @@ class AttendanceScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text("Attendance"), centerTitle: true),
+      bottomNavigationBar: const AppFooter(),
       body: Obx(() {
         if (controller.isLoading.value) {
           return const Center(child: CircularProgressIndicator());
@@ -4018,17 +4020,31 @@ class _ActionButtons extends StatelessWidget {
     return pw.Row(
       mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
       children: [
-        // ⬅️ LEFT
-        pw.Text(
-          "Powered by KI Software Solutions",
-          style: pw.TextStyle(fontSize: 10),
+        // ⬅️ LEFT: Powered by KI Software Solutions (bold+underlined)
+        pw.RichText(
+          text: pw.TextSpan(
+            children: [
+              pw.TextSpan(
+                text: "Powered by ",
+                style: pw.TextStyle(fontSize: 10),
+              ),
+              pw.TextSpan(
+                text: "KI Software Solutions",
+                style: pw.TextStyle(
+                  fontSize: 10,
+                  fontWeight: pw.FontWeight.bold,
+                  decoration: pw.TextDecoration.underline,
+                ),
+              ),
+            ],
+          ),
         ),
 
-        // ⬇️ CENTER (CLICKABLE + UNDERLINED)
+        // ➡️ CENTER: visit our website with full URL
         pw.UrlLink(
-          destination: "https://www.kisoftwaressolutions.com/", // change this
+          destination: "https://www.kisoftwaressolutions.com/",
           child: pw.Text(
-            "Visit Our Website",
+            "visit our website: www.kisoftwaressolutions.com",
             style: pw.TextStyle(
               fontSize: 10,
               color: PdfColors.blue,
@@ -4037,9 +4053,9 @@ class _ActionButtons extends StatelessWidget {
           ),
         ),
 
-        // ➡️ RIGHT
+        // ➡️ RIGHT: contact number
         pw.UrlLink(
-          destination: "tel:+923197617561", // change this
+          destination: "tel:+923197617561",
           child: pw.Text(
             "+92 3197617561",
             style: pw.TextStyle(

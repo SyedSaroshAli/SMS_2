@@ -9,6 +9,7 @@ import 'package:school_management_system/dashboard/Drawer_Screens/notes_subscree
 import 'package:school_management_system/services/auth_service.dart';
 import 'package:school_management_system/utils/file_downloader.dart';
 import 'package:school_management_system/utils/pdf_handler.dart';
+import 'package:school_management_system/utils/app_footer.dart';
 
 class NotesScreen extends StatelessWidget {
   NotesScreen({super.key});
@@ -22,7 +23,7 @@ class NotesScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text("Notes")),
-
+      bottomNavigationBar: const AppFooter(),
       body: Padding(
         padding: EdgeInsets.all(isSmall ? 10 : 12), // ✅ responsive padding
         child: Column(
