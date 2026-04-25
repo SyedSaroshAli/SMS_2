@@ -1338,6 +1338,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/material.dart';
 import 'package:school_management_system/controllers/about_controller.dart';
+import 'package:school_management_system/services/about_service.dart';
 import 'package:school_management_system/utils/pdf_handler.dart';
 import 'package:printing/printing.dart';
 import 'package:school_management_system/models/compositeMarksheetModel.dart';
@@ -1527,13 +1528,21 @@ class CompositeMarksheetController extends GetxController {
           studentPhoto = await networkImage(marksheet.studentInfo.photoUrl!);
         } catch (_) {}
       }
-final about = Get.find<AboutController>().aboutData.value;
+var about = Get.find<AboutController>().aboutData.value;
+about ??= await AboutService().fetchAbout();
 
 Uint8List? logoBytes;
 
-if (about?.entityLogo != null) {
-  final response = await http.get(Uri.parse(about!.entityLogo));
-  logoBytes = response.bodyBytes;
+if (about?.entityLogo != null && about!.entityLogo.isNotEmpty) {
+  try {
+    final response = await http.get(
+      Uri.parse(about.entityLogo),
+    ).timeout(const Duration(seconds: 10));
+    if (response.statusCode >= 200 && response.statusCode < 300 &&
+        response.bodyBytes.isNotEmpty) {
+      logoBytes = response.bodyBytes;
+    }
+  } catch (_) {}
 }
       pdf.addPage(
         pw.Page(

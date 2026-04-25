@@ -4,6 +4,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 import 'package:school_management_system/controllers/about_controller.dart';
+import 'package:school_management_system/services/about_service.dart';
 import 'package:school_management_system/models/student_fee_models.dart';
 import 'package:school_management_system/services/api_service.dart';
 import 'package:school_management_system/services/auth_service.dart';
@@ -197,7 +198,8 @@ class StudentFeeController extends GetxController {
     pw.ImageProvider? logoImage;
 
 try {
-  final about = Get.find<AboutController>().aboutData.value;
+  var about = Get.find<AboutController>().aboutData.value;
+  about ??= await AboutService().fetchAbout();
 
   if (about?.entityLogo != null && about!.entityLogo!.isNotEmpty) {
     logoImage = await networkImage(about.entityLogo!);

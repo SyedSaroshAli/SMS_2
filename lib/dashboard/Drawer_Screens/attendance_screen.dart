@@ -9,6 +9,7 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:school_management_system/controllers/about_controller.dart';
+import 'package:school_management_system/services/about_service.dart';
 //import 'package:google_fonts/google_fonts.dart';
 //import 'package:flutter/services.dart' show NetworkAssetBundle, rootBundle;
 import 'package:school_management_system/controllers/attendance_controller.dart';
@@ -3788,13 +3789,21 @@ class _ActionButtons extends StatelessWidget {
       final interBold = pw.Font.helveticaBold();
       final merriweatherBold = pw.Font.timesBold();
       final dancingScriptBold = pw.Font.timesBoldItalic();
-      final about = Get.find<AboutController>().aboutData.value;
+      var about = Get.find<AboutController>().aboutData.value;
+      about ??= await AboutService().fetchAbout();
 
       Uint8List? logoBytes;
 
-      if (about?.entityLogo != null) {
-        final response = await http.get(Uri.parse(about!.entityLogo));
-        logoBytes = response.bodyBytes;
+      if (about?.entityLogo != null && about!.entityLogo.isNotEmpty) {
+        try {
+          final response = await http.get(
+            Uri.parse(about.entityLogo),
+          ).timeout(const Duration(seconds: 10));
+          if (response.statusCode >= 200 && response.statusCode < 300 &&
+              response.bodyBytes.isNotEmpty) {
+            logoBytes = response.bodyBytes;
+          }
+        } catch (_) {}
       }
 
       pdf.addPage(

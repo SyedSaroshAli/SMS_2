@@ -6,6 +6,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:school_management_system/controllers/about_controller.dart';
+import 'package:school_management_system/services/about_service.dart';
 import 'package:school_management_system/controllers/admit_card_controller.dart';
 import 'package:school_management_system/models/admitcardModel.dart';
 import 'package:school_management_system/utils/pdf_handler.dart';
@@ -571,7 +572,8 @@ Future<void> _generatePdf(
     final titleFont = pw.Font.helveticaBold();
 
     // ✅ LOGO FROM API
-    final about = Get.find<AboutController>().aboutData.value;
+    var about = Get.find<AboutController>().aboutData.value;
+    about ??= await AboutService().fetchAbout();
     pw.MemoryImage? logoImage;
 
     try {
